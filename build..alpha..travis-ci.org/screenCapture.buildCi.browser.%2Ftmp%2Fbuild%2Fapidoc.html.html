@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/robrich/gulp-rimraf"
-
-    >gulp-rimraf (v0.2.1)</a>
+    <a href="https://github.com/robrich/gulp-rimraf">gulp-rimraf (v0.2.1)</a>
 </h1>
 <h4>rimraf plugin for gulp</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.gulp-rimraf">module gulp-rimraf</a><ol>
 
@@ -112,7 +105,7 @@
 		options = {};
 	}
 
-	if (options.force &#x26;&#x26; typeof options.force !== &#x27;boolean&#x27;) {
+	if (options.force &amp;&amp; typeof options.force !== 'boolean') {
 		options.force = false;
 	}
 
@@ -124,25 +117,25 @@
 		var filepath = path.resolve(cwd, file.path);
 		var relativeFromCwd = path.relative(cwd, filepath);
 
-		if (relativeFromCwd === &#x27;&#x27;) {
-			this.emit(&#x27;error&#x27;, new Error(&#x27;Cannot delete the current working directory: &#x27; + filepath));
+		if (relativeFromCwd === '') {
+			this.emit('error', new Error('Cannot delete the current working directory: ' + filepath));
 			this.push(file);
 			return cb();
 		}
 
-		if (!options.force &#x26;&#x26; relativeFromCwd.substr(0, 2) === &#x27;..&#x27;) {
-			this.emit(&#x27;error&#x27;, new Error(&#x27;Cannot delete files or folders outside the current working directory: &#x27; + filepath));
+		if (!options.force &amp;&amp; relativeFromCwd.substr(0, 2) === '..') {
+			this.emit('error', new Error('Cannot delete files or folders outside the current working directory: ' + filepath));
 			this.push(file);
 			return cb();
 		}
 
 		if (options.verbose) {
-			console.log(&#x27;gulp-rimraf: removed &#x27;+filepath);
+			console.log('gulp-rimraf: removed '+filepath);
 		}
 
 		rimraf(filepath, function (err) {
 			if (err) {
-				this.emit(&#x27;error&#x27;, err);
+				this.emit('error', err);
 			}
 			this.push(file);
 			cb();
@@ -196,3 +189,4 @@
     ]
 </div>
 </div>
+</body></html>

@@ -61,12 +61,132 @@
 
     <li class="apidocModuleLi"><a href="#apidoc.module.gulp-rimraf">module gulp-rimraf</a><ol>
 
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-rimraf.gulp-rimraf">
+            function <span class="apidocSignatureSpan"></span>gulp-rimraf
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-rimraf.toString">
+            function <span class="apidocSignatureSpan">gulp-rimraf.</span>toString
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.gulp-rimraf.toString">module gulp-rimraf.toString</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-rimraf.toString.toString">
+            function <span class="apidocSignatureSpan">gulp-rimraf.</span>toString
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
     </ol></li>
 
 </ol></div>
 
 <div class="apidocSectionDiv">
 <h1><a href="#apidoc.module.gulp-rimraf" id="apidoc.module.gulp-rimraf">module gulp-rimraf</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-rimraf.gulp-rimraf" id="apidoc.element.gulp-rimraf.gulp-rimraf">
+        function <span class="apidocSignatureSpan"></span>gulp-rimraf
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">gulp-rimraf = function (options){
+	if (!options) {
+		options = {};
+	}
+
+	if (options.force &#x26;&#x26; typeof options.force !== &#x27;boolean&#x27;) {
+		options.force = false;
+	}
+
+	function del(file, encoding, cb){
+		//jshint validthis:true
+
+		var cwd = file.cwd || process.cwd();
+		// For safety always resolve paths
+		var filepath = path.resolve(cwd, file.path);
+		var relativeFromCwd = path.relative(cwd, filepath);
+
+		if (relativeFromCwd === &#x27;&#x27;) {
+			this.emit(&#x27;error&#x27;, new Error(&#x27;Cannot delete the current working directory: &#x27; + filepath));
+			this.push(file);
+			return cb();
+		}
+
+		if (!options.force &#x26;&#x26; relativeFromCwd.substr(0, 2) === &#x27;..&#x27;) {
+			this.emit(&#x27;error&#x27;, new Error(&#x27;Cannot delete files or folders outside the current working directory: &#x27; + filepath));
+			this.push(file);
+			return cb();
+		}
+
+		if (options.verbose) {
+			console.log(&#x27;gulp-rimraf: removed &#x27;+filepath);
+		}
+
+		rimraf(filepath, function (err) {
+			if (err) {
+				this.emit(&#x27;error&#x27;, err);
+			}
+			this.push(file);
+			cb();
+		}.bind(this));
+	}
+
+	return through.obj(del);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-rimraf.toString" id="apidoc.element.gulp-rimraf.toString">
+        function <span class="apidocSignatureSpan">gulp-rimraf.</span>toString
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">toString = function () {
+    return text;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.gulp-rimraf.toString" id="apidoc.module.gulp-rimraf.toString">module gulp-rimraf.toString</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-rimraf.toString.toString" id="apidoc.element.gulp-rimraf.toString.toString">
+        function <span class="apidocSignatureSpan">gulp-rimraf.</span>toString
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function toString() { [native code] }</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
 
 </div>
 
